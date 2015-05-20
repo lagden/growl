@@ -16,7 +16,6 @@
     "start": "http-server dev -o -a127.0.0.1 -p8285"
   },
   "volo": {
-    "url": "github:lagden/growl/0.1.0#es5",
     "baseUrl": "dev/js/lib",
     "dependencies": {
       "require": "github:jrburke/requirejs/2.1.17",
