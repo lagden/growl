@@ -8,7 +8,7 @@
 **Via [Bower](http://bower.io/)**
 
 ```
-bower install growl
+bower install lagden-growl
 ```
 
 **Via [Volo](http://volojs.org/)**
