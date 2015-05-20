@@ -14,7 +14,7 @@ bower install growl
 **Via [Volo](http://volojs.org/)**
 
 ```
-volo add github:lagden/growl/0.1.0#es5
+volo add lagden/growl/0.1.0#es5
 ```
 
 
