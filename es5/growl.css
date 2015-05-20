@@ -1,0 +1,95 @@
+.theNotification {
+  background-color: rgba(0,0,255,0.8);
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(128,128,128,0.5);
+  box-sizing: border-box;
+  width: 300px;
+  padding: 10px;
+  position: fixed;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  will-change: transform, opacity;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+.theNotification__title {
+  font-size: 1.1em;
+  margin: 0 0 10px 0;
+}
+.theNotification__msg {
+  font-size: 0.9em;
+  margin: 0;
+}
+.theNotification--show {
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-name: theNotificationIn;
+          animation-name: theNotificationIn;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.theNotification--remove {
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-name: theNotificationOut;
+          animation-name: theNotificationOut;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+@-webkit-keyframes theNotificationIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+@keyframes theNotificationIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+@-webkit-keyframes theNotificationOut {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+}
+@keyframes theNotificationOut {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+}

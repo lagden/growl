@@ -1,0 +1,53 @@
+@import 'stick/mixin'
+
+.theNotification
+  background-color rgba(blue, 0.8)
+  color white
+  border-radius 5px
+  box-shadow 0 0 5px rgba(gray, 0.5)
+  box-sizing border-box
+  width 300px
+  padding 10px
+  position fixed
+  top auto
+  right auto
+  bottom auto
+  left auto
+  user-select none
+  backface-visibility hidden
+  will-change transform, opacity
+  transform translateY(0)
+
+.theNotification__title
+  font-size 1.1em
+  margin 0 0 10px 0
+
+.theNotification__msg
+  font-size 0.9em
+  margin 0
+
+.theNotification--show
+  animation-duration 0.5s
+  animation-name theNotificationIn
+  animation-fill-mode forwards
+
+.theNotification--remove
+  animation-duration 0.3s
+  animation-name theNotificationOut
+  animation-fill-mode forwards
+
++keyframes(theNotificationIn)
+  from
+    opacity 0
+    transform translateY(-20px)
+  to
+    opacity 1
+    transform translateY(0)
+
++keyframes(theNotificationOut)
+  from
+    opacity 1
+    transform translateY(0)
+  to
+    opacity 0
+    transform translateY(20px)

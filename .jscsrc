@@ -1,0 +1,16 @@
+{
+  "preset": "google",
+  "validateIndentation": 2,
+  "esnext": true,
+  "disallowQuotedKeysInObjects": null,
+  "requireCapitalizedComments": {
+    "allExcept": ["jshint", "global"]
+  },
+  "excludeFiles": [
+    "build/**",
+    "dev/**",
+    "node_modules/**",
+    "test/**",
+    "tmp/**"
+  ]
+}
