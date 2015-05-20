@@ -1,5 +1,5 @@
 {
-  "name": "growl",
+  "name": "lagden-growl",
   "description": "Plugin to show notification like Growl",
   "version": "0.1.0",
   "main": "es5/growl.js",
