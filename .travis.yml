@@ -1,6 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - '0.12'
+- '0.12'
+before_script:
+  - git config --global user.email "lagden@gmail.com"
+  - git config --global user.name "Travis-CI"
 before_install: npm install -g grunt-cli
 install: npm install
+env:
+  global:
+    secure: B+zO2KJGZGUcZjTrd0eIKUGjxzIlyZzYLEWxYdk81gG8qV6Kq4Y8Y4syL9H93n6oUQhv9gQIKiun6r/B2zw3a/lp6cWh2nES9ImcvfGYOax99N71IU0vLdgFG5RUaVBkHOvcDhbIIjx2bMDxetQDkhe96nYcSWKXb83FCYIZqdaVWl/1OVWziDmKh8aRKziMt1eXLOqgAYDIwE6DfW2+cXbGleKlcGei8SdyDw0Aq0phYOM1Yw75FOnC9g4eUSPHcSX2qk9ZVuamb/Q2RHLwxTx+5X54z6CFBHMS8rl9nVSUri+gE1PCDQO4NPT+l8uaUo2GkVSblGcaZjB7YmVVN3jOlOFkUkanc01wVEZrHAAEwK0ZdxlTTwnRwLzbuEW3LoQXSRBDHyCJ6X4cphPRI0Ht743y4HJTEa3eAgosaJuk7Nx9bsLvtYXRPV8aRgpWfZplN+FXpPhEfIzp+2LzMjha6UZ8dsOkWSqA+/9hHqh3zI7kaBEsLUQje5xgYm4w/K4jTzNmbHPXCJAqhc3GJVH/2qAy75KfWUgrcGOFiD6KAOMICiPY/qHR7bWLJf/UHHqzxEPHFrmjT/WWsOOXfkrso7topfTJj1NdYSRk4xX/nHtiUEP5E563xc2dtgeehtwGjI02pjBvqwt+E7Qv2uwNM2ITl/KpZ/0CJ9/CTZQ=
