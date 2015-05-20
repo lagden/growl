@@ -5,13 +5,13 @@
 
 ## Install
 
-**Via [Bower](http://bower.io/)**
+Via [Bower](http://bower.io/)
 
 ```
 bower install lagden-growl
 ```
 
-**Via [Volo](http://volojs.org/)**
+Via [Volo](http://volojs.org/)
 
 ```
 volo add lagden/growl/0.1.0#es5
