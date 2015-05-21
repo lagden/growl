@@ -9,7 +9,8 @@
 
 import {animationEvent, objectAssign} from './lib/util';
 
-let animationEnd = animationEvent(document)[3];
+let doc = window ? window.document : global;
+let animationEnd = animationEvent(doc)[3];
 
 class Growl {
   constructor(target, options) {
@@ -18,7 +19,7 @@ class Growl {
       offset: 10
     };
     this.items = [];
-    this.container = target || document.body;
+    this.container = target || doc.body;
 
     objectAssign(this.opts, options);
   }
@@ -44,14 +45,13 @@ class Growl {
     }
 
     let content = this.template().replace(/\{(.*?)\}/g, (a, b) => r[b]);
-    let item = document.createElement('div');
+    let item = doc.createElement('div');
 
     item.insertAdjacentHTML('afterbegin', content);
-    item.style.opacity = 0;
     item.style.top = `${offset[1]}px`;
     item.style.right = `${this.opts.offset}px`;
     item.dataset.offset = offset[1];
-    item.className = 'theNotification theNotification--show';
+    item.classList.add('theNotification', 'theNotification--show');
     item.addEventListener('click', this, false);
 
     this.container.appendChild(item);

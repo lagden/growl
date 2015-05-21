@@ -65,11 +65,10 @@
       var item = document.createElement('div');
 
       item.insertAdjacentHTML('afterbegin', content);
-      item.style.opacity = 0;
       item.style.top = offset[1] + 'px';
       item.style.right = this.opts.offset + 'px';
       item.dataset.offset = offset[1];
-      item.className = 'theNotification theNotification--show';
+      item.classList.add('theNotification', 'theNotification--show');
       item.addEventListener('click', this, false);
 
       this.container.appendChild(item);

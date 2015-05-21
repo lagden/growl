@@ -1,11 +1,13 @@
 {
   "name": "lagden-growl",
+  "version": "0.1.1",
   "description": "Plugin to show notification like Growl",
   "repository": "lagden/growl",
   "author": {
     "name": "Thiago Lagden",
     "email": "lagden@gmail.com"
   },
+  "main": "dev/index.html",
   "engines": {
     "node": ">=0.12.0"
   },
@@ -62,7 +64,5 @@
     "jshint": "^2.7.0",
     "time-grunt": "^1.2.0",
     "volo": "^0.3.6"
-  },
-  "version": "0.1.0",
-  "main": "dev/index.html"
+  }
 }

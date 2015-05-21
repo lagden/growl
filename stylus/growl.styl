@@ -16,7 +16,6 @@
   user-select none
   backface-visibility hidden
   will-change transform, opacity
-  transform translateY(0)
 
 .theNotification__title
   font-size 1.1em
@@ -27,12 +26,12 @@
   margin 0
 
 .theNotification--show
-  animation-duration 0.5s
+  animation-duration 0.35s
   animation-name theNotificationIn
-  animation-fill-mode forwards
+  animation-fill-mode both
 
 .theNotification--remove
-  animation-duration 0.3s
+  animation-duration 0.35s
   animation-name theNotificationOut
   animation-fill-mode forwards
 
@@ -45,9 +44,6 @@
     transform translateY(0)
 
 +keyframes(theNotificationOut)
-  from
-    opacity 1
-    transform translateY(0)
   to
     opacity 0
     transform translateY(20px)
