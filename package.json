@@ -16,8 +16,7 @@
     "pretest": "jscs . && jshint es5/growl.js",
     "test": "grunt test",
     "start": "http-server dev -o -a127.0.0.1 -p8285",
-    "build": "http-server build -o -a127.0.0.1 -p8285",
-    "deploy": "bash bin/deploy-gh-pages.sh"
+    "build": "http-server build -o -a127.0.0.1 -p8285"
   },
   "volo": {
     "baseUrl": "dev/js/lib",
