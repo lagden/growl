@@ -17,7 +17,7 @@
     "test": "grunt test",
     "start": "http-server dev -o -a127.0.0.1 -p8285",
     "build": "http-server build -o -a127.0.0.1 -p8285",
-    "deploy": "bin/deploy-ghpages"
+    "deploy": "bash bin/deploy-gh-pages.sh"
   },
   "volo": {
     "baseUrl": "dev/js/lib",

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-rm -rf build
+rm -rf build || exit 0;
 grunt build
 cd build
 git init
