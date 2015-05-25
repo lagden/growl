@@ -7,52 +7,55 @@ module.exports = (grunt) ->
   grunt.file.defaultEncoding = 'utf8'
 
   grunt.initConfig
-    coffee: compile:
-      options: bare: true
-      files: [
-        expand: true
-        flatten: false
-        cwd: '<%= project.coffee %>'
-        src: [ '**/*.coffee' ]
-        dest: '<%= project.tmp %>/js'
-        ext: '.js'
-      ]
-
-    babel: compile:
-      options:
-        sourceMap: false
-        modules: 'umd'
-        whitelist: [
-          'spec'
-          'es6.templateLiterals'
-          'es6.modules'
-          'es6.blockScoping'
-          'es6.arrowFunctions'
-          'es6.classes'
-          'es6.parameters.default'
+    coffee:
+      compile:
+        options:
+          bare: true
+        files: [
+          expand: true
+          flatten: false
+          cwd: '<%= project.coffee %>'
+          src: [ '**/*.coffee' ]
+          dest: '<%= project.tmp %>/js'
+          ext: '.js'
         ]
 
-      files: [
-        expand: true
-        flatten: false
-        cwd: 'es6'
-        src: [ '**/*.js' ]
-        dest: '<%= project.tmp %>/js/es5'
-        ext: '.js'
-      ]
+    babel:
+      compile:
+        options:
+          sourceMap: false
+          modules: 'umd'
+          whitelist: [
+            'spec'
+            'es6.templateLiterals'
+            'es6.modules'
+            'es6.blockScoping'
+            'es6.arrowFunctions'
+            'es6.classes'
+            'es6.parameters.default'
+          ]
+        files: [
+          expand: true
+          flatten: false
+          cwd: 'es6'
+          src: [ '**/*.js' ]
+          dest: '<%= project.tmp %>/js/es5'
+          ext: '.js'
+        ]
 
     fixmyjs:
       options:
         jshintrc: '.jshintrc'
         indentpref: 'spaces'
-      fix: files: [
-        expand: true
-        flatten: false
-        cwd: '<%= project.tmp %>/js'
-        src: [ '**/*.js' ]
-        dest: '<%= project.dev %>/js'
-        ext: '.js'
-      ]
+      fix:
+        files: [
+          expand: true
+          flatten: false
+          cwd: '<%= project.tmp %>/js'
+          src: [ '**/*.js' ]
+          dest: '<%= project.dev %>/js'
+          ext: '.js'
+        ]
 
     connect:
       server:
@@ -83,7 +86,8 @@ module.exports = (grunt) ->
         ]
 
       html:
-        options: pretty: true
+        options:
+          pretty: true
         files: [
           expand: true
           flatten: false
@@ -96,7 +100,8 @@ module.exports = (grunt) ->
       build:
         options:
           pretty: false
-          data: build: true
+          data:
+            build: true
         files: [
           expand: true
           flatten: false
@@ -107,7 +112,8 @@ module.exports = (grunt) ->
         ]
 
     autoprefixer:
-      options: browsers: [ 'last 1 version' ]
+      options:
+        browsers: [ 'last 1 version' ]
       files:
         expand: true
         flatten: false
@@ -144,62 +150,71 @@ module.exports = (grunt) ->
         port: 8184
         server: baseDir: [ '<%= project.prod %>' ]
 
-    requirejs: almond: options:
-      optimize: 'uglify2'
-      uglify2:
-        warnings: false
-        compress:
-          sequences: true
-          properties: true
-          drop_debugger: true
-          unused: true
-          drop_console: true
-      optimizeCss: 'standard'
-      generateSourceMaps: true
-      keepAmdefine: true
-      preserveLicenseComments: false
-      findNestedDependencies: true
-      useStrict: true
-      baseUrl: '<%= project.dev %>/js/lib'
-      mainConfigFile: '<%= project.dev %>/js/config.js'
-      name: 'almond'
-      include: [ '../main' ]
-      out: '<%= project.prod %>/js/main.js'
+    requirejs:
+      almond:
+        options:
+          optimize: 'uglify2'
+          uglify2:
+            warnings: false
+            mangle: true
+            compress:
+              evaluate: false
+              sequences: true
+              properties: true
+              unused: true
+              hoist_funs: false
+              hoist_vars: false
+              drop_debugger: true
+              drop_console: true
+          optimizeCss: 'none'
+          generateSourceMaps: true
+          keepAmdefine: true
+          preserveLicenseComments: false
+          findNestedDependencies: true
+          useStrict: true
+          baseUrl: '<%= project.dev %>/js/lib'
+          mainConfigFile: '<%= project.dev %>/js/config.js'
+          name: 'almond'
+          include: [ '../main' ]
+          out: '<%= project.prod %>/js/main.js'
 
-    cssmin: dynamic:
-      options:
-        keepSpecialComments: 0
-        report: 'gzip'
-      files: [
-        expand: true
-        flatten: false
-        cwd: '<%= project.dev %>/css'
-        src: [ '**/*.css' ]
-        dest: '<%= project.prod %>/css'
-        ext: '.css'
+    cssmin:
+      dynamic:
+        options:
+          keepSpecialComments: 0
+          report: 'gzip'
+        files: [
+          expand: true
+          flatten: false
+          cwd: '<%= project.dev %>/css'
+          src: [ '**/*.css' ]
+          dest: '<%= project.prod %>/css'
+          ext: '.css'
+        ]
+
+    minifyHtml:
+      dynamic:
+        options:
+          comments: false
+          conditionals: true
+          spare: false
+          quotes: true
+          cdata: false
+          empty: false
+        files: [
+          expand: true
+          cwd: '<%= project.dev %>'
+          src: [ '**/*.html' ]
+          dest: '<%= project.prod %>'
+        ]
+
+    concurrent:
+      dev: [
+        'scripts'
+        'styles'
+        'jade:js'
+        'jade:html'
       ]
-
-    minifyHtml: dynamic:
-      options:
-        comments: false
-        conditionals: true
-        spare: false
-        quotes: true
-        cdata: false
-        empty: false
-      files: [
-        expand: true
-        cwd: '<%= project.dev %>'
-        src: [ '**/*.html' ]
-        dest: '<%= project.prod %>'
-      ]
-
-    concurrent: dev: [
-      'scripts'
-      'styles'
-      'jade:js'
-      'jade:html'
-    ]
 
     clean:
       dist: [ '<%= project.prod %>' ]
@@ -210,16 +225,9 @@ module.exports = (grunt) ->
       dist:
         src: '<%= project.dev %>/favicon.ico'
         dest: '<%= project.prod %>/favicon.ico'
-      es5:
-        files: [
-          expand: true
-          cwd: '<%= project.dev %>/js/es5'
-          src: ['**']
-          dest: 'es5'
-        ]
       es5css:
-        src: '<%= project.dev %>/css/notification.css'
-        dest: 'es5/notification.css'
+        src: '<%= project.dev %>/css/growl.css'
+        dest: 'es5/growl.css'
 
     project:
       'prod': 'build'
