@@ -1,6 +1,6 @@
 {
   "name": "lagden-growl",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Plugin to show notification like Growl",
   "repository": "lagden/growl",
   "author": {
@@ -16,7 +16,7 @@
     "pretest": "jscs . && jshint es5/growl.js",
     "test": "grunt test",
     "start": "http-server dev -o -a127.0.0.1 -p8285",
-    "build": "http-server build -o -a127.0.0.1 -p8285"
+    "build": "http-server build -o -a127.0.0.1 -p8286"
   },
   "volo": {
     "baseUrl": "dev/js/lib",

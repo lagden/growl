@@ -1,5 +1,5 @@
 /*!
- * Growl v0.1.0
+ * Growl
  * Plugin to show notification like Growl
  * http://lagden.github.io/growl
  * MIT license
@@ -23,7 +23,7 @@
 }(window, function(window, utility) {
 
   var doc = window.document;
-  var animationEnd = utility.animationEvent(doc)[3];
+  var transitionEnd = utility.transitionEvent(doc)[3];
 
   function Growl (target, options) {
     this.opts = {
@@ -68,10 +68,15 @@
       item.style.top = offset[1] + 'px';
       item.style.right = this.opts.offset + 'px';
       item.dataset.offset = offset[1];
-      item.classList.add('theNotification', 'theNotification--show');
+      item.classList.add('theNotification');
       item.addEventListener('click', this, false);
 
       this.container.appendChild(item);
+
+      // Make sure the initial state is applied.
+      window.getComputedStyle(item).opacity;
+      item.classList.add('theNotification--show');
+
       this.items.push(item);
 
       function cbTimeout() {
@@ -86,14 +91,14 @@
       if (event) {
         item = event.currentTarget;
       }
-      item.addEventListener(animationEnd, this, false);
+      item.addEventListener(transitionEnd, this, false);
       item.classList.add('theNotification--remove');
     },
 
     remove: function remove(event) {
       var item = event.currentTarget;
       item.removeEventListener('click', this, false);
-      item.removeEventListener(animationEnd, this, false);
+      item.removeEventListener(transitionEnd, this, false);
       var index = this.items.indexOf(item);
       if (index !== -1) {
         this.container.removeChild(this.items[index]);
@@ -103,7 +108,7 @@
 
     handleEvent: function handleEvent(event) {
       switch (event.type) {
-        case animationEnd: this.remove(event); break;
+        case transitionEnd: this.remove(event); break;
         case 'click': this.animation(event);
       }
     }

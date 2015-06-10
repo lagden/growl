@@ -1,16 +1,10 @@
 'use strict'
 
 define [
-  'templates/sample'
   'es5/growl'
-], (template, Growl) ->
+], (Growl) ->
 
   $ = document.querySelector.bind document
-
-  $info = $ '#info'
-  $info.insertAdjacentHTML 'afterbegin', template
-    name: navigator.appName
-    version: navigator.appVersion
 
   g = new Growl()
 

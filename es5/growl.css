@@ -18,6 +18,11 @@
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   will-change: transform, opacity;
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
+  opacity: 0;
+  transition: opacity 0.45s, -webkit-transform 0.45s;
+  transition: opacity 0.45s, transform 0.45s;
 }
 .theNotification__title {
   font-size: 1.1em;
@@ -28,56 +33,12 @@
   margin: 0;
 }
 .theNotification--show {
-  -webkit-animation-duration: 0.35s;
-          animation-duration: 0.35s;
-  -webkit-animation-name: theNotificationIn;
-          animation-name: theNotificationIn;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  opacity: 1;
 }
 .theNotification--remove {
-  -webkit-animation-duration: 0.35s;
-          animation-duration: 0.35s;
-  -webkit-animation-name: theNotificationOut;
-          animation-name: theNotificationOut;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-@-webkit-keyframes theNotificationIn {
-  from {
-    opacity: 0;
-    -webkit-transform: translateY(-20px);
-            transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-}
-@keyframes theNotificationIn {
-  from {
-    opacity: 0;
-    -webkit-transform: translateY(-20px);
-            transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-}
-@-webkit-keyframes theNotificationOut {
-  to {
-    opacity: 0;
-    -webkit-transform: translateY(20px);
-            transform: translateY(20px);
-  }
-}
-@keyframes theNotificationOut {
-  to {
-    opacity: 0;
-    -webkit-transform: translateY(20px);
-            transform: translateY(20px);
-  }
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+  opacity: 0;
 }
