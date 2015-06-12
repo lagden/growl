@@ -23,7 +23,7 @@
 }(window, function(window, utility) {
 
   var doc = window.document;
-  var transitionEnd = utility.transitionEvent(doc)[3];
+  var transitionEnd = utility.transitionEvent(doc);
 
   function Growl (target, options) {
     this.opts = {
