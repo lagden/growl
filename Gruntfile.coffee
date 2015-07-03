@@ -57,18 +57,8 @@ module.exports = (grunt) ->
           ext: '.js'
         ]
 
-    connect:
-      server:
-        options:
-          base: '.',
-          port: 8182
-
     qunit:
-      all:
-        options:
-          urls: [
-            'http://localhost:8182/test/growl.html'
-          ]
+      all: ['test/**/*.html']
 
     jade:
       js:
@@ -286,7 +276,6 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'test', [
-    'connect'
     'qunit'
   ]
 

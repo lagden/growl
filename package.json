@@ -1,6 +1,6 @@
 {
   "name": "lagden-growl",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Plugin to show notification like Growl",
   "repository": "lagden/growl",
   "author": {
@@ -49,7 +49,6 @@
     "grunt-concurrent": "^1.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-coffee": "^0.13.0",
-    "grunt-contrib-connect": "^0.10.1",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-cssmin": "^0.12.3",
     "grunt-contrib-jade": "^0.14.1",

@@ -9,7 +9,7 @@ define [
   g = new Growl()
 
   $('#bt').addEventListener 'click', () ->
-    g.notifica 'Yeahh', 'ES6 is life!!'
+    g.notifica 'Yeahh', 'ES6 is life!!', 'theNotification--theme-red'
     return
 
   return

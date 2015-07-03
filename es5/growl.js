@@ -25,15 +25,15 @@
   var doc = window.document;
   var transitionEnd = utility.transitionEvent(doc);
 
-  function Growl (target, options) {
+  function Growl (options) {
     this.opts = {
+      target: doc.body,
       duration: 5000,
       offset: 10
     };
-    this.items = [];
-    this.container = target || document.body;
-
     utility.objectAssign(this.opts, options);
+    this.items = [];
+    this.container = this.opts.target;
   }
 
   Growl.prototype = {
@@ -44,7 +44,8 @@
       ].join('');
     },
 
-    notifica: function notifica(t, m) {
+    notifica: function notifica(t, m, colorCss) {
+      colorCss = colorCss || false;
       var self = this;
       var tempo;
       var offset = [this.opts.offset, this.opts.offset];
@@ -62,13 +63,16 @@
       var content = this.template().replace(/\{(.*?)\}/g, function cb(a, b) {
         return r[b];
       });
-      var item = document.createElement('div');
+      var item = doc.createElement('div');
 
       item.insertAdjacentHTML('afterbegin', content);
       item.style.top = offset[1] + 'px';
       item.style.right = this.opts.offset + 'px';
       item.dataset.offset = offset[1];
       item.classList.add('theNotification');
+      if (typeof colorCss === 'string') {
+        item.classList.add(colorCss);
+      }
       item.addEventListener('click', this, false);
 
       this.container.appendChild(item);
