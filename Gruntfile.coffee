@@ -184,22 +184,6 @@ module.exports = (grunt) ->
           ext: '.css'
         ]
 
-    minifyHtml:
-      dynamic:
-        options:
-          comments: false
-          conditionals: true
-          spare: false
-          quotes: true
-          cdata: false
-          empty: false
-        files: [
-          expand: true
-          cwd: '<%= project.dev %>'
-          src: [ '**/*.html' ]
-          dest: '<%= project.prod %>'
-        ]
-
     concurrent:
       dev: [
         'scripts'
@@ -272,7 +256,6 @@ module.exports = (grunt) ->
     'jade:build'
     'requirejs'
     'cssmin'
-    'minifyHtml'
     'copy'
   ]
 
