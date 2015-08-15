@@ -48,22 +48,21 @@ class Growl {
     let item = doc.createElement('div');
 
     item.insertAdjacentHTML('afterbegin', content);
-    item.style.top = `${offset[1]}px`;
-    item.style.right = `${this.opts.offset}px`;
+    item.addEventListener('click', this, false);
+    item.style.top = offset[1] + 'px';
+    item.style.right = this.opts.offset + 'px';
     item.dataset.offset = offset[1];
     item.classList.add('theNotification');
     if (typeof colorCss === 'string') {
       item.classList.add(colorCss);
     }
-    item.addEventListener('click', this, false);
 
+    this.items.push(item);
     this.container.appendChild(item);
 
     // Make sure the initial state is applied.
     window.getComputedStyle(item).opacity;
     item.classList.add('theNotification--show');
-
-    this.items.push(item);
 
     let tempo = setTimeout(() => {
       this.animation(null, item);
@@ -99,8 +98,8 @@ class Growl {
 }
 
 let instance = null;
-function getInstance(target, options = {}) {
-  instance = instance || new Growl(target, options);
+function getInstance(options = {}) {
+  instance = instance || new Growl(options);
   return instance;
 }
 

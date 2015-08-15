@@ -78,6 +78,8 @@ module.exports = (grunt) ->
       html:
         options:
           pretty: true
+          data:
+            build: false
         files: [
           expand: true
           flatten: false
@@ -97,7 +99,7 @@ module.exports = (grunt) ->
           flatten: false
           cwd: '<%= project.jade %>/html'
           src: [ '**/*.jade' ]
-          dest: '<%= project.dev %>'
+          dest: '<%= project.prod %>'
           ext: '.html'
         ]
 
@@ -164,7 +166,7 @@ module.exports = (grunt) ->
           useStrict: true
           baseUrl: '<%= project.dev %>/js/lib'
           mainConfigFile: '<%= project.dev %>/js/config.js'
-          name: 'almond'
+          name: '../../../node_modules/almond/almond',
           include: [ '../main' ]
           out: '<%= project.prod %>/js/main.js'
 
@@ -215,6 +217,13 @@ module.exports = (grunt) ->
       dist:
         src: '<%= project.dev %>/favicon.ico'
         dest: '<%= project.prod %>/favicon.ico'
+      es5js:
+        files: [
+          expand: true
+          cwd: '<%= project.dev %>/js/es5/',
+          src: '**/*.js'
+          dest: 'es5/'
+        ]
       es5css:
         src: '<%= project.dev %>/css/growl.css'
         dest: 'es5/growl.css'
@@ -238,8 +247,16 @@ module.exports = (grunt) ->
         'ext': '.css'
       ]
 
+    symlink:
+      options:
+        overwrite: false
+      require:
+        src: 'node_modules/requirejs/require.js',
+        dest: '<%= project.dev %>/js/lib/require.js'
+
   grunt.registerTask 'default', [
     'clean:tmp'
+    'symlink:require'
     'concurrent:dev'
   ]
 

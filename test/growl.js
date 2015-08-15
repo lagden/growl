@@ -1,12 +1,12 @@
-/* global QUnit, Growl */
+/* global QUnit, growl */
 
 'use strict';
 
 QUnit.test('singleton test', function(assert) {
-  var instanceOne = new Growl({
+  var instanceOne = growl({
     duration: 10000
   });
-  var instanceTwo = new Growl();
+  var instanceTwo = growl();
   assert.deepEqual(
     instanceOne,
     instanceTwo,
@@ -15,10 +15,10 @@ QUnit.test('singleton test', function(assert) {
 });
 
 QUnit.test('color test', function(assert) {
-  var growl = new Growl();
-  growl.notifica('Title', 'Awesome message', 'blue');
+  var growlInstance = growl();
+  growlInstance.notifica('Title', 'Awesome message', 'blue');
   assert.ok(
-    growl.items[0].classList.contains('blue'),
+    growlInstance.items[0].classList.contains('blue'),
     'Esperado a cor azul'
   );
 });

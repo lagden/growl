@@ -1,6 +1,6 @@
 {
   "name": "lagden-growl",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Plugin to show notification like Growl",
   "repository": "lagden/growl",
   "author": {
@@ -12,36 +12,15 @@
     "node": ">=0.12.0"
   },
   "scripts": {
-    "postinstall": "volo add",
-    "pretest": "jscs . && jshint es5/growl.js",
+    "pretest": "grunt build",
     "test": "grunt test",
-    "start": "http-server dev -o -a127.0.0.1 -p8285",
-    "build": "http-server build -o -a127.0.0.1 -p8286"
-  },
-  "volo": {
-    "baseUrl": "dev/js/lib",
-    "ignore": [
-      "**/.*",
-      "node_modules",
-      "build",
-      "coffee",
-      "dev",
-      "es6",
-      "jade",
-      "stylus",
-      "tmp",
-      "test",
-      "*.md",
-      "Gruntfile.*",
-      "package.json"
-    ],
-    "dependencies": {
-      "require": "github:jrburke/requirejs/2.1.17",
-      "almond": "github:jrburke/almond/0.3.1",
-      "jade": "github:jadejs/jade/1.9.2#runtime.js"
-    }
+    "prestart": "grunt",
+    "start": "ws -c -d dev -p 8285",
+    "prepublish": "grunt test"
   },
   "devDependencies": {
+    "almond": "^0.3.1",
+    "requirejs": "^2.1.18",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^3.0.0",
     "grunt-babel": "^5.0.0",
@@ -58,11 +37,13 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-fixmyjs": "^0.3.0",
     "grunt-minify-html": "^2.0.0",
-    "http-server": "^0.8.0",
+    "local-web-server": "^0.5.22",
     "jit-grunt": "^0.9.1",
     "jscs": "^1.13.1",
     "jshint": "^2.7.0",
-    "time-grunt": "^1.2.0",
-    "volo": "^0.3.6"
+    "time-grunt": "^1.2.0"
+  },
+  "dependencies": {
+    "grunt-contrib-symlink": "^0.3.0"
   }
 }

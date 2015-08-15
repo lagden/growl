@@ -14,7 +14,7 @@ bower install lagden-growl
 Via [Volo](http://volojs.org/)
 
 ```
-volo add lagden/growl/0.3.0#es5
+volo add lagden/growl/0.3.1#es5
 ```
 
 
@@ -23,7 +23,7 @@ volo add lagden/growl/0.3.0#es5
 It's a `Singleton Library`
 
 ```javascript
-var growl = new Growl({
+var instance = growl({
   duration: 7000
   offset: 20
 });
@@ -32,6 +32,7 @@ for(var i=-1; ++i < 10;) {
   growl.notifica('Count...', i);
 }
 ```
+
 
 ## License
 
