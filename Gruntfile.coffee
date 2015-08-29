@@ -7,6 +7,19 @@ module.exports = (grunt) ->
   grunt.file.defaultEncoding = 'utf8'
 
   grunt.initConfig
+    project:
+      prod: 'build'
+      dev: 'dev'
+      coffee: 'coffee'
+      jade: 'jade'
+      pre: 'stylus'
+
+    xo:
+      options:
+        quiet: true
+        ignores: []
+      target: ['es6/**/*.js']
+
     coffee:
       compile:
         options:
@@ -16,49 +29,51 @@ module.exports = (grunt) ->
           flatten: false
           cwd: '<%= project.coffee %>'
           src: [ '**/*.coffee' ]
-          dest: '<%= project.tmp %>/js'
+          dest: '<%= project.dev %>/js'
           ext: '.js'
         ]
 
     babel:
       compile:
         options:
-          sourceMap: false
+          sourceMap: true
           modules: 'umd'
-          whitelist: [
-            'spec'
-            'es6.templateLiterals'
-            'es6.modules'
-            'es6.blockScoping'
-            'es6.arrowFunctions'
-            'es6.classes'
-            'es6.parameters.default'
-          ]
         files: [
           expand: true
           flatten: false
           cwd: 'es6'
           src: [ '**/*.js' ]
-          dest: '<%= project.tmp %>/js/es5'
+          dest: '<%= project.dev %>/js/es5'
           ext: '.js'
         ]
 
-    fixmyjs:
-      options:
-        jshintrc: '.jshintrc'
-        indentpref: 'spaces'
-      fix:
+    stylus:
+      dev:
+        options:
+          compress: false
         files: [
           expand: true
           flatten: false
-          cwd: '<%= project.tmp %>/js'
-          src: [ '**/*.js' ]
-          dest: '<%= project.dev %>/js'
-          ext: '.js'
+          cwd: '<%= project.pre %>'
+          src: ['*.styl']
+          dest: '<%= project.dev %>/css'
+          ext: '.css'
         ]
 
-    qunit:
-      all: ['test/**/*.html']
+    postcss:
+      dev:
+        options:
+          processors: [
+            require('autoprefixer-core')(browsers: 'last 2 versions')
+          ]
+        files: [
+          expand: true
+          flatten: false
+          cwd: '<%= project.dev %>/css'
+          src: ['*.css']
+          dest: '<%= project.dev %>/css'
+          ext: '.css'
+        ]
 
     jade:
       js:
@@ -74,7 +89,6 @@ module.exports = (grunt) ->
           dest: '<%= project.dev %>/js/templates'
           ext: '.js'
         ]
-
       html:
         options:
           pretty: true
@@ -88,7 +102,6 @@ module.exports = (grunt) ->
           dest: '<%= project.dev %>'
           ext: '.html'
         ]
-
       build:
         options:
           pretty: false
@@ -102,17 +115,6 @@ module.exports = (grunt) ->
           dest: '<%= project.prod %>'
           ext: '.html'
         ]
-
-    autoprefixer:
-      options:
-        browsers: [ 'last 1 version' ]
-      files:
-        expand: true
-        flatten: false
-        cwd: '<%= project.tmp %>/css'
-        src: [ '*.css' ]
-        dest: '<%= project.dev %>/css'
-        ext: '.css'
 
     watch:
       script:
@@ -194,7 +196,6 @@ module.exports = (grunt) ->
 
     clean:
       dist: [ '<%= project.prod %>' ]
-      tmp: [ '<%= project.tmp %>' ]
       es5: [ 'es5' ]
 
     copy:
@@ -212,25 +213,6 @@ module.exports = (grunt) ->
         src: '<%= project.dev %>/css/growl.css'
         dest: 'es5/growl.css'
 
-    project:
-      'prod': 'build'
-      'dev': 'dev'
-      'tmp': 'tmp'
-      'coffee': 'coffee'
-      'jade': 'jade'
-      'pre': 'stylus'
-
-    stylus: 'dev':
-      'options': 'compress': false
-      'files': [
-        'expand': true
-        'flatten': false
-        'cwd': '<%= project.pre %>'
-        'src': [ '*.styl' ]
-        'dest': '<%= project.tmp %>/css'
-        'ext': '.css'
-      ]
-
     symlink:
       options:
         overwrite: false
@@ -238,16 +220,18 @@ module.exports = (grunt) ->
         src: 'node_modules/requirejs/require.js',
         dest: '<%= project.dev %>/js/lib/require.js'
 
+    qunit:
+      all: ['test/**/*.html']
+
   grunt.registerTask 'default', [
-    'clean:tmp'
     'symlink:require'
     'concurrent:dev'
   ]
 
   grunt.registerTask 'scripts', [
+    'xo'
     'coffee'
     'babel'
-    'fixmyjs:fix'
   ]
 
   grunt.registerTask 'build', [
@@ -272,7 +256,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'styles', [
     'stylus'
-    'autoprefixer'
+    'postcss'
   ]
 
   grunt.registerTask 'test', [
