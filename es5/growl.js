@@ -26,6 +26,8 @@
 	var doc = window ? window.document : global;
 	var transitionEnd = (0, _libUtil.transitionEvent)(doc);
 
+	var instance = null;
+
 	var Growl = (function () {
 		function Growl(options) {
 			_classCallCheck(this, Growl);
@@ -130,7 +132,6 @@
 		return Growl;
 	})();
 
-	var instance = null;
 	function getInstance() {
 		var options = arguments[0] === undefined ? {} : arguments[0];
 

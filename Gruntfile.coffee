@@ -206,7 +206,7 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: '<%= project.dev %>/js/es5/',
-          src: '**/*.js'
+          src: ['**/*.js', '**/*.js.map']
           dest: 'es5/'
         ]
       es5css:
