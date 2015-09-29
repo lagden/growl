@@ -21,16 +21,16 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _objectAssign = _interopRequire(_lagdenUtilsDistObjectAssign);
+	var _objectAssign = _interopRequireDefault(_lagdenUtilsDistObjectAssign);
 
-	var _transitionEvent = _interopRequire(_lagdenUtilsDistTransitionEvent);
+	var _transitionEvent = _interopRequireDefault(_lagdenUtilsDistTransitionEvent);
 
 	var doc = window ? window.document : global;
-	var transitionEnd = (0, _transitionEvent)(doc);
+	var transitionEnd = (0, _transitionEvent['default'])(doc);
 
 	var instance = null;
 
@@ -43,7 +43,7 @@
 				duration: 5000,
 				offset: 10
 			};
-			(0, _objectAssign)(this.opts, options);
+			(0, _objectAssign['default'])(this.opts, options);
 			this.items = [];
 			this.container = this.opts.target;
 		}
@@ -58,7 +58,7 @@
 			value: function notifica(t, m) {
 				var _this = this;
 
-				var colorCss = arguments[2] === undefined ? false : arguments[2];
+				var colorCss = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
 
 				var offset = [this.opts.offset, this.opts.offset];
 				var r = {
@@ -79,8 +79,8 @@
 
 				item.insertAdjacentHTML('afterbegin', content);
 				item.addEventListener('click', this, false);
-				item.style.top = '' + offset[1] + 'px';
-				item.style.right = '' + this.opts.offset + 'px';
+				item.style.top = offset[1] + 'px';
+				item.style.right = this.opts.offset + 'px';
 				item.dataset.offset = offset[1];
 				item.classList.add('theNotification');
 				if (typeof colorCss === 'string') {
@@ -139,7 +139,7 @@
 	})();
 
 	function getInstance() {
-		var options = arguments[0] === undefined ? {} : arguments[0];
+		var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
 		instance = instance || new Growl(options);
 		return instance;
