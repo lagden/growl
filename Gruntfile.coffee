@@ -1,10 +1,10 @@
 'use strict'
 
 module.exports = (grunt) ->
+  grunt.file.defaultEncoding = 'utf8'
+
   require('jit-grunt') grunt
   require('time-grunt') grunt
-
-  grunt.file.defaultEncoding = 'utf8'
 
   grunt.initConfig
     project:
@@ -43,7 +43,7 @@ module.exports = (grunt) ->
           flatten: false
           cwd: 'es6'
           src: [ '**/*.js' ]
-          dest: '<%= project.dev %>/js/es5'
+          dest: '<%= project.dev %>/js/component'
           ext: '.js'
         ]
 
@@ -64,7 +64,7 @@ module.exports = (grunt) ->
       dev:
         options:
           processors: [
-            require('autoprefixer-core')(browsers: 'last 2 versions')
+            require('autoprefixer')(browsers: 'last 2 versions')
           ]
         files: [
           expand: true
@@ -195,23 +195,24 @@ module.exports = (grunt) ->
       ]
 
     clean:
-      dist: [ '<%= project.prod %>' ]
-      es5: [ 'es5' ]
+      prod: ['<%= project.prod %>']
+      dev: ['<%= project.dev %>/js/component']
+      dist: ['dist']
 
     copy:
-      dist:
+      prod:
         src: '<%= project.dev %>/favicon.ico'
         dest: '<%= project.prod %>/favicon.ico'
-      es5js:
+      dist:
         files: [
           expand: true
-          cwd: '<%= project.dev %>/js/es5/',
+          cwd: '<%= project.dev %>/js/component',
           src: ['**/*.js', '**/*.js.map']
-          dest: 'es5/'
+          dest: 'dist'
         ]
-      es5css:
+      css:
         src: '<%= project.dev %>/css/growl.css'
-        dest: 'es5/growl.css'
+        dest: 'dist/growl.css'
 
     symlink:
       options:
@@ -219,12 +220,16 @@ module.exports = (grunt) ->
       require:
         src: 'node_modules/requirejs/require.js',
         dest: '<%= project.dev %>/js/lib/require.js'
+      lagdenUtils:
+        src: 'node_modules/lagden-utils/dist',
+        dest: '<%= project.dev %>/js/lib/lagden-utils/dist'
 
     qunit:
       all: ['test/**/*.html']
 
   grunt.registerTask 'default', [
-    'symlink:require'
+    'clean:dev'
+    'symlink'
     'concurrent:dev'
   ]
 
@@ -235,6 +240,7 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'build', [
+    'clean:prod'
     'clean:dist'
     'default'
     'jade:build'
@@ -260,6 +266,9 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'test', [
+    'default'
+    'copy:dist'
+    'copy:css'
     'qunit'
   ]
 

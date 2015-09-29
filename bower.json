@@ -1,36 +1,47 @@
 {
   "name": "lagden-growl",
   "description": "Plugin to show notification like Growl",
-  "version": "0.4.1",
-  "main": "es5/growl.js",
-  "repository": "lagden/growl",
-  "author": {
-    "name": "Thiago Lagden",
-    "email": "lagden@gmail.com"
-  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thiago Lagden",
+      "email": "lagden@gmail.com",
+      "homepage": "http://lagden.in"
+    }
+  ],
+  "main": [
+    "dist/growl.js",
+    "dist/growl.css"
+  ],
   "moduleType": [
     "amd",
     "globals",
-    "node"
+    "node",
+    "es6"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lagden/utils.git"
+  },
+  "ignore": [
+    "bin",
+    "build",
+    "coffee",
+    "dev",
+    "jade",
+    "stylus",
+    "test",
+    "node_modules",
+    "*.md",
+    "Gruntfile.*",
+    "package.json",
+    ".*"
   ],
   "keywords": [
     "growl",
     "notification"
   ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "build",
-    "coffee",
-    "dev",
-    "es6",
-    "jade",
-    "stylus",
-    "tmp",
-    "test",
-    "*.md",
-    "Gruntfile.*",
-    "package.json"
-  ]
+  "dependencies": {
+    "lagden-utils": "~0.3.0"
+  }
 }

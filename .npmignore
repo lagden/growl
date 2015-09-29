@@ -1,0 +1,14 @@
+bin
+build
+coffee
+dev
+jade
+stylus
+test
+bower.json
+Gruntfile.*
+.*
+
+# don't ignore .npmignore files
+# these are used in some tests.
+!.npmignore

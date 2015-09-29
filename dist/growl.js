@@ -1,16 +1,16 @@
 (function (global, factory) {
 	if (typeof define === 'function' && define.amd) {
-		define(['exports', 'module', './lib/util'], factory);
+		define(['exports', 'module', 'lagden-utils/dist/object-assign', 'lagden-utils/dist/transition-event'], factory);
 	} else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
-		factory(exports, module, require('./lib/util'));
+		factory(exports, module, require('lagden-utils/dist/object-assign'), require('lagden-utils/dist/transition-event'));
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, mod, global.util);
+		factory(mod.exports, mod, global.objectAssign, global.transitionEvent);
 		global.growl = mod.exports;
 	}
-})(this, function (exports, module, _libUtil) {
+})(this, function (exports, module, _lagdenUtilsDistObjectAssign, _lagdenUtilsDistTransitionEvent) {
 	/* Growl
   * Plugin to show notification like Growl
   * http://lagden.github.io/growl
@@ -21,10 +21,16 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+	function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+	var _objectAssign = _interopRequire(_lagdenUtilsDistObjectAssign);
+
+	var _transitionEvent = _interopRequire(_lagdenUtilsDistTransitionEvent);
+
 	var doc = window ? window.document : global;
-	var transitionEnd = (0, _libUtil.transitionEvent)(doc);
+	var transitionEnd = (0, _transitionEvent)(doc);
 
 	var instance = null;
 
@@ -37,7 +43,7 @@
 				duration: 5000,
 				offset: 10
 			};
-			(0, _libUtil.objectAssign)(this.opts, options);
+			(0, _objectAssign)(this.opts, options);
 			this.items = [];
 			this.container = this.opts.target;
 		}

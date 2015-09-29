@@ -6,7 +6,8 @@
 
 'use strict';
 
-import {transitionEvent, objectAssign} from './lib/util';
+import objectAssign from 'lagden-utils/dist/object-assign';
+import transitionEvent from 'lagden-utils/dist/transition-event';
 
 const doc = window ? window.document : global;
 const transitionEnd = transitionEvent(doc);

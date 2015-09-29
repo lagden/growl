@@ -1,14 +1,23 @@
-# Growl [![Build Status](https://travis-ci.org/lagden/growl.svg?branch=master)](https://travis-ci.org/lagden/growl)
+# Growl 
+[![Build Status](https://travis-ci.org/lagden/growl.svg?branch=master)](https://travis-ci.org/lagden/growl)
+[![Dependency Status](https://david-dm.org/lagden/growl.svg)](https://david-dm.org/lagden/growl) 
+[![devDependency Status](https://david-dm.org/lagden/growl/dev-status.svg)](https://david-dm.org/lagden/growl#info=devDependencies) 
 
 > Plugin to show notification like Growl
 
 
 ## Install
 
+Via [NPM](https://www.npmjs.com/)
+
+```
+npm i lagden-growl --save
+```
+
 Via [Bower](http://bower.io/)
 
 ```
-bower install lagden-growl
+bower install lagden-growl --save
 ```
 
 
