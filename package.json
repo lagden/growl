@@ -50,6 +50,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-postcss": "^0.6.0",
     "grunt-xo": "^0.6.0",
+    "jade": "^1.11.0",
     "jit-grunt": "^0.9.1",
     "requirejs": "^2.1.18",
     "time-grunt": "^1.2.0"
