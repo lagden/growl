@@ -1,6 +1,6 @@
 {
   "name": "lagden-growl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Plugin to show notification like Growl",
   "keywords": [
     "growl",
@@ -28,7 +28,7 @@
     "start": "grunt serve"
   },
   "dependencies": {
-    "lagden-utils": "^0.3.0"
+    "lagden-utils": "^0.4.0"
   },
   "devDependencies": {
     "almond": "^0.3.1",
