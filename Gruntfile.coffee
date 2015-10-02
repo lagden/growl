@@ -216,7 +216,7 @@ module.exports = (grunt) ->
 
     symlink:
       options:
-        overwrite: false
+        overwrite: true
       require:
         src: 'node_modules/requirejs/require.js',
         dest: '<%= project.dev %>/js/lib/require.js'
