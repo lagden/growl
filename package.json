@@ -25,8 +25,7 @@
   "scripts": {
     "pretest": "grunt build",
     "test": "grunt test",
-    "start": "grunt serve",
-    "prepublish": "grunt test"
+    "start": "grunt serve"
   },
   "dependencies": {
     "lagden-utils": "^0.3.0"
