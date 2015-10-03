@@ -1,4 +1,5 @@
 # Growl 
+[![NPM version](https://img.shields.io/npm/v/lagden-growl.svg)](https://www.npmjs.com/package/lagden-growl)
 [![Build Status](https://travis-ci.org/lagden/growl.svg?branch=master)](https://travis-ci.org/lagden/growl)
 [![Dependency Status](https://david-dm.org/lagden/growl.svg)](https://david-dm.org/lagden/growl) 
 [![devDependency Status](https://david-dm.org/lagden/growl/dev-status.svg)](https://david-dm.org/lagden/growl#info=devDependencies) 
