@@ -42,6 +42,6 @@
     "notification"
   ],
   "dependencies": {
-    "lagden-utils": "~0.4.0"
+    "lagden-utils": "3.0.0"
   }
 }

@@ -224,8 +224,8 @@ module.exports = (grunt) ->
         src: 'node_modules/jade/runtime.js',
         dest: '<%= project.dev %>/js/lib/jade.js'
       lagdenUtils:
-        src: 'node_modules/lagden-utils/dist',
-        dest: '<%= project.dev %>/js/lib/lagden-utils/dist'
+        src: 'node_modules/lagden-utils/dist/index.js',
+        dest: '<%= project.dev %>/js/lib/utils.js'
 
     qunit:
       all: ['test/**/*.html']

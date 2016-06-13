@@ -6,22 +6,24 @@
 
 'use strict';
 
-import objectAssign from 'lagden-utils/dist/object-assign';
-import transitionEvent from 'lagden-utils/dist/transition-event';
+import * as lagdenUtils from 'lagden-utils/dist/index';
 
-const doc = window ? window.document : global;
-const transitionEnd = transitionEvent(doc);
+const transitionEnd = lagdenUtils.transitionEvent();
 
 let instance = null;
 
+if ('assign' in Object === false) {
+	Object.assign = lagdenUtils.extend;
+}
+
 class Growl {
-	constructor(options) {
+	constructor(options = {}) {
 		this.opts = {
-			target: doc.body,
-			duration: 5000,
+			target: document.body,
+			duration: 7000,
 			offset: 10
 		};
-		objectAssign(this.opts, options);
+		Object.assign(this.opts, options);
 		this.items = [];
 		this.container = this.opts.target;
 	}
@@ -40,15 +42,15 @@ class Growl {
 			msg: m
 		};
 
-		const last = this.items[this.items.length - 1];
-		if (last !== undefined) {
-			offset[0] = last.dataset.offset - '';
+		const last = this.items[this.items.length - 1] || false;
+		if (last) {
+			offset[0] = Number(last.dataset.offset);
 			offset[1] = offset[0] + last.offsetHeight + this.opts.offset;
 		}
 
 		const content = this.template().replace(/\{(.*?)\}/g, (a, b) => r[b]);
-		const item = doc.createElement('div');
 
+		const item = document.createElement('div');
 		item.insertAdjacentHTML('afterbegin', content);
 		item.addEventListener('click', this, false);
 		item.style.top = `${offset[1]}px`;
@@ -59,8 +61,11 @@ class Growl {
 			item.classList.add(colorCss);
 		}
 
+		const docfrag = document.createDocumentFragment();
+		docfrag.appendChild(item);
+
 		this.items.push(item);
-		this.container.appendChild(item);
+		this.container.appendChild(docfrag);
 
 		// Make sure the initial state is applied.
 		window.getComputedStyle(item).getPropertyValue('opacity');
