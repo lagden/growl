@@ -1,7 +1,6 @@
-sudo: required
 language: node_js
 node_js:
   - "4.1"
 before_install: npm install -g grunt-cli
 install: npm install
-script: bash bin/deploy-gh-pages.sh
+# script: bash bin/deploy-gh-pages.sh

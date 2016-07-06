@@ -1,16 +1,16 @@
 (function (global, factory) {
 	if (typeof define === 'function' && define.amd) {
-		define(['exports', 'module', 'lagden-utils/dist/index'], factory);
+		define(['exports', 'module'], factory);
 	} else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
-		factory(exports, module, require('lagden-utils/dist/index'));
+		factory(exports, module);
 	} else {
 		var mod = {
 			exports: {}
 		};
-		factory(mod.exports, mod, global.lagdenUtils);
+		factory(mod.exports, mod);
 		global.growl = mod.exports;
 	}
-})(this, function (exports, module, _lagdenUtilsDistIndex) {
+})(this, function (exports, module) {
 	/* Growl
   * Plugin to show notification like Growl
   * http://lagden.github.io/growl
@@ -23,12 +23,18 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var transitionEnd = _lagdenUtilsDistIndex.transitionEvent();
-
+	var transitionEnd = 'transitionend';
 	var instance = null;
 
+	function extend(a, b) {
+		Object.keys(b).forEach(function (prop) {
+			a[prop] = b[prop];
+		});
+		return a;
+	}
+
 	if ('assign' in Object === false) {
-		Object.assign = _lagdenUtilsDistIndex.extend;
+		Object.assign = extend;
 	}
 
 	var Growl = (function () {

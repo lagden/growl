@@ -1,6 +1,6 @@
 {
   "name": "lagden-growl",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Plugin to show notification like Growl",
   "keywords": [
     "growl",
@@ -23,12 +23,10 @@
   "main": "dist/growl.js",
   "repository": "lagden/growl",
   "scripts": {
-    "pretest": "grunt build",
+    "gzip": "find ./dist -name '*.js' -type f -exec sh -c 'gzip -c --best {} > {}.gz' \\;",
+    "pretest": "grunt build && npm run gzip",
     "test": "grunt test",
     "start": "grunt serve"
-  },
-  "dependencies": {
-    "lagden-utils": "3.0.2"
   },
   "devDependencies": {
     "almond": "^0.3.1",

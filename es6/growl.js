@@ -6,14 +6,18 @@
 
 'use strict';
 
-import * as lagdenUtils from 'lagden-utils/dist/index';
-
-const transitionEnd = lagdenUtils.transitionEvent();
-
+const transitionEnd = 'transitionend';
 let instance = null;
 
+function extend(a, b) {
+	Object.keys(b).forEach(prop => {
+		a[prop] = b[prop];
+	});
+	return a;
+}
+
 if ('assign' in Object === false) {
-	Object.assign = lagdenUtils.extend;
+	Object.assign = extend;
 }
 
 class Growl {
