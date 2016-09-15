@@ -1,6 +1,6 @@
 {
   "name": "lagden-growl",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Plugin to show notification like Growl",
   "keywords": [
     "growl",
