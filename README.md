@@ -43,7 +43,7 @@ var growl = new Growl(options);
 
 Name        | Type     | Default   | Description
 ----------- | -------- | --------- | -----------
-options     | `object` | see below | Initial options
+options     | `object` | [see below](#options) | Initial options
 
 
 #### options
