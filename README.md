@@ -45,6 +45,7 @@ Name        | Type     | Default   | Description
 ----------- | -------- | --------- | -----------
 options     | `object` | see below | Initial options
 
+
 #### options
 
 Name        | Type     | Default | Description
