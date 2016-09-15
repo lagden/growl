@@ -1,41 +1,32 @@
-/* Growl
- * Plugin to show notification like Growl
- * http://lagden.github.io/growl
- * MIT license
- */
-
 'use strict';
 
-const transitionEnd = 'transitionend';
-let instance = null;
+import {extend, transitionEvent} from 'lagden-utils';
 
-function extend(a, b) {
-	Object.keys(b).forEach(prop => {
-		a[prop] = b[prop];
-	});
-	return a;
-}
-
-if ('assign' in Object === false) {
-	Object.assign = extend;
-}
+const transitionEnd = transitionEvent();
 
 class Growl {
-	constructor(options = {}) {
-		this.opts = {
-			target: document.body,
-			duration: 7000,
-			offset: 10
-		};
-		Object.assign(this.opts, options);
-		this.items = [];
-		this.container = this.opts.target;
+	set options(opts = {}) {
+		extend(this.opts, opts);
 	}
 
-	template() {
+	constructor(opts = {}) {
+		this.opts = {
+			duration: 7000,
+			offset: 10,
+			position: 'right'
+		};
+
+		this.options = opts;
+
+		this.items = [];
+		this.container = document.body;
+	}
+
+	template(dados) {
+		const {title, msg} = dados;
 		return [
-			'<h3 class="theNotification__title">{title}</h3>',
-			'<p class="theNotification__msg">{msg}</p>'
+			`<h3 class="growl__title">${title}</h3>`,
+			`<p class="growl__msg">${msg}</p>`
 		].join('');
 	}
 
@@ -48,19 +39,17 @@ class Growl {
 
 		const last = this.items[this.items.length - 1] || false;
 		if (last) {
-			offset[0] = Number(last.dataset.offset);
+			offset[0] = Number(last.getAttribute('data-offset'));
 			offset[1] = offset[0] + last.offsetHeight + this.opts.offset;
 		}
 
-		const content = this.template().replace(/\{(.*?)\}/g, (a, b) => r[b]);
-
 		const item = document.createElement('div');
-		item.insertAdjacentHTML('afterbegin', content);
 		item.addEventListener('click', this, false);
+		item.insertAdjacentHTML('afterbegin', this.template(r));
 		item.style.top = `${offset[1]}px`;
-		item.style.right = `${this.opts.offset}px`;
-		item.dataset.offset = offset[1];
-		item.classList.add('theNotification');
+		item.style[this.opts.position || 'right'] = `${this.opts.offset}px`;
+		item.setAttribute('data-offset', offset[1]);
+		item.classList.add('growl');
 		if (typeof colorCss === 'string') {
 			item.classList.add(colorCss);
 		}
@@ -73,11 +62,10 @@ class Growl {
 
 		// Make sure the initial state is applied.
 		window.getComputedStyle(item).getPropertyValue('opacity');
-		item.classList.add('theNotification--show');
+		item.classList.add('growl--show');
 
-		const tempo = setTimeout(() => {
+		item.tempo = setTimeout(() => {
 			this.animation(null, item);
-			clearTimeout(tempo);
 		}, this.opts.duration);
 	}
 
@@ -85,17 +73,22 @@ class Growl {
 		if (event) {
 			item = event.currentTarget;
 		}
+		clearTimeout(item.tempo);
+		item.tempo = null;
 		item.addEventListener(transitionEnd, this, false);
-		item.classList.add('theNotification--remove');
+		item.classList.add('growl--remove');
 	}
 
-	remove(event) {
-		const item = event.currentTarget;
+	remove(event, item) {
+		if (event) {
+			item = event.currentTarget;
+		}
 		item.removeEventListener('click', this, false);
 		item.removeEventListener(transitionEnd, this, false);
 		const index = this.items.indexOf(item);
 		if (index !== -1) {
 			this.container.removeChild(this.items[index]);
+			this.items[index] = null;
 			this.items.splice(index, 1);
 		}
 	}
@@ -113,9 +106,4 @@ class Growl {
 	}
 }
 
-function getInstance(options = {}) {
-	instance = instance || new Growl(options);
-	return instance;
-}
-
-export default getInstance;
+export default Growl;

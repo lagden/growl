@@ -1,0 +1,44 @@
+duration = 0.45s
+jump = 1.250
+
+.growl
+	background-color rgba(blue, 0.8)
+	border-radius 0.35em
+	box-shadow 0 0 0.35em rgba(gray, 0.5)
+	box-sizing border-box
+	color white
+	width 18.750em
+	padding 0.625em
+	position fixed
+	top auto
+	right auto
+	bottom auto
+	left auto
+	user-select none
+	backface-visibility hidden
+	will-change transform, opacity
+	transform translateY(jump * -1em)
+	opacity 0
+	transition opacity duration, transform duration
+
+.growl__title
+	font-size 1.1em
+	margin 0 0 0.625em 0
+	color inherit
+
+.growl__msg
+	font-size 0.9em
+	margin 0
+	color inherit
+
+.growl--show
+	transform translateY(0)
+	opacity 1
+
+.growl--remove
+	transform translateY(jump * 1em)
+	opacity 0
+
+.growl--theme-red
+	background-color rgba(red, 0.8)
+	color white

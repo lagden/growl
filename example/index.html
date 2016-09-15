@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Example Growl</title>
+		<link rel="stylesheet" href="../dist/growl.css">
+	</head>
+	<body>
+		<button id="bt" type="button">Click here!!</button>
+	</body>
+	<script src="../dist/growl.js"></script>
+	<script>
+		var growl = new Growl();
+		document.querySelector('#bt').addEventListener('click', () => {
+			growl.notifica('Yeahh', 'ES6 is life!!');
+			growl.notifica('Yeahh', 'ES6 is life!!<br> More and more and more and more...', 'growl--theme-red');
+		});
+	</script>
+</html>
