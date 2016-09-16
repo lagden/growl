@@ -17,7 +17,7 @@
 [devDep]:        https://david-dm.org/lagden/growl#info=devDependencies
 
 
-Plugin to show notification like Growl
+Show notification like Growl
 
 ## Install
 
@@ -33,26 +33,26 @@ npm i -S lagden-growl
 Take a look in [example](https://github.com/lagden/growl/blob/master/example/index.html)
 
 
-## API
+### API
 
-```js
-var growl = new Growl(options);
-```
+It's show notification like Growl, but can be changed in options.
 
-### Params
+#### Growl(options)
 
-Name        | Type     | Default   | Description
------------ | -------- | --------- | -----------
+##### Params
+
+Name        | Type     | Default               | Description
+----------- | -------- | --------------------- | -----------
 options     | `object` | [see below](#options) | Initial options
 
 
-#### options
+###### options
 
 Name        | Type     | Default | Description
 ----------- | -------- | ------- | -----------
 duration    | `number` | `7000`  | Time to self remove
-offset      | `number` | `10`    | Margin between growl boxes
-position    | `string` | `right` | Side of growl
+offset      | `number` | `10`    | Space between notification
+position    | `string` | `right` | Side of notification
 
 
 ## License
