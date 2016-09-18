@@ -4,6 +4,20 @@ import {extend, transitionEvent} from 'lagden-utils';
 
 const transitionEnd = transitionEvent();
 
+// function getZ(el) {
+// 	const z = Number(window.getComputedStyle(el).getPropertyValue('z-index'));
+// 	return isNaN(z) ? 0 : z;
+// }
+
+// function findZ() {
+// 	const highestZ = [];
+// 	const all = document.querySelectorAll('*');
+// 	all.forEach(el => {
+// 		highestZ.push(getZ(el));
+// 	});
+// 	return highestZ.sort((a, b) => b - a)[0];
+// }
+
 class Growl {
 	set options(opts = {}) {
 		extend(this.opts, opts);
@@ -13,13 +27,13 @@ class Growl {
 		this.opts = {
 			duration: 7000,
 			offset: 10,
-			position: 'right'
+			position: 'right',
+			container: document.body,
+			findZ: false
 		};
 
 		this.options = opts;
-
 		this.items = [];
-		this.container = document.body;
 	}
 
 	template(dados) {
@@ -54,11 +68,15 @@ class Growl {
 			item.classList.add(colorCss);
 		}
 
+		// if (this.opts.findZ) {
+		// 	item.style.zIndex = findZ();
+		// }
+
 		const docfrag = document.createDocumentFragment();
 		docfrag.appendChild(item);
 
 		this.items.push(item);
-		this.container.appendChild(docfrag);
+		this.opts.container.appendChild(docfrag);
 
 		// Make sure the initial state is applied.
 		window.getComputedStyle(item).getPropertyValue('opacity');
@@ -87,7 +105,7 @@ class Growl {
 		item.removeEventListener(transitionEnd, this, false);
 		const index = this.items.indexOf(item);
 		if (index !== -1) {
-			this.container.removeChild(this.items[index]);
+			this.opts.container.removeChild(this.items[index]);
 			this.items[index] = null;
 			this.items.splice(index, 1);
 		}

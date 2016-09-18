@@ -6,7 +6,8 @@ import Growl from '../src/index';
 
 const g = new Growl({
 	offset: 11,
-	duration: 200
+	duration: 200,
+	findZ: true
 });
 
 test('options', t => {
