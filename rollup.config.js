@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-import buble from 'rollup-plugin-buble';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import buble from 'rollup-plugin-buble'
+import nodeResolve from 'rollup-plugin-node-resolve'
 
 export default {
 	entry: 'src/index.js',
@@ -11,9 +11,10 @@ export default {
 	plugins: [
 		buble(),
 		nodeResolve({
+			module: true,
 			jsnext: true,
 			main: true
 		})
 	],
 	sourceMap: true
-};
+}
