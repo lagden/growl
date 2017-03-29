@@ -1,0 +1,51 @@
+.growl {
+  background-color: rgba(0,0,255,0.8);
+  border-radius: 0.35em;
+  box-shadow: 0 0 0.35em rgba(128,128,128,0.5);
+  box-sizing: border-box;
+  color: #fff;
+  width: 18.75em;
+  padding: 0.625em;
+  position: fixed;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform: translateY(-1.25em);
+          transform: translateY(-1.25em);
+  opacity: 0;
+  -webkit-transition: opacity 0.45s, -webkit-transform 0.45s;
+  transition: opacity 0.45s, -webkit-transform 0.45s;
+  transition: opacity 0.45s, transform 0.45s;
+  transition: opacity 0.45s, transform 0.45s, -webkit-transform 0.45s;
+}
+.growl__title {
+  font-size: 1.1em;
+  margin: 0 0 0.625em 0;
+  color: inherit;
+}
+.growl__msg {
+  font-size: 0.9em;
+  margin: 0;
+  color: inherit;
+}
+.growl--show {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  opacity: 1;
+}
+.growl--remove {
+  -webkit-transform: translateY(1.25em);
+          transform: translateY(1.25em);
+  opacity: 0;
+}
+.growl--theme-red {
+  background-color: rgba(255,0,0,0.8);
+  color: #fff;
+}
